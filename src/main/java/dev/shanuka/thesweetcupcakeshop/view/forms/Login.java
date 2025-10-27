@@ -1,17 +1,20 @@
 package dev.shanuka.thesweetcupcakeshop.view.forms;
 
+import dev.shanuka.thesweetcupcakeshop.exception.ApplicationError;
+import dev.shanuka.thesweetcupcakeshop.exception.NotFoundError;
+import dev.shanuka.thesweetcupcakeshop.service.AuthService;
 import dev.shanuka.thesweetcupcakeshop.util.Fonts;
 import dev.shanuka.thesweetcupcakeshop.util.FormManager;
 import dev.shanuka.thesweetcupcakeshop.util.InputlValidator;
 import dev.shanuka.thesweetcupcakeshop.util.Messages;
 import dev.shanuka.thesweetcupcakeshop.util.PlaceholderManager;
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /**
- *
+ * Handles user authentication and input validation
+ * 
  * @author Shanuka
  */
 public class Login extends javax.swing.JFrame {
@@ -92,6 +95,7 @@ public class Login extends javax.swing.JFrame {
         emailTextField.setBorder(null);
         emailTextField.setMargin(new java.awt.Insets(2, 10, 2, 6));
         emailTextField.setName("emailField"); // NOI18N
+        emailTextField.setNextFocusableComponent(passwordTextField);
         emailTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 emailTextFieldFocusGained(evt);
@@ -151,6 +155,7 @@ public class Login extends javax.swing.JFrame {
         passwordTextField.setBorder(null);
         passwordTextField.setMargin(new java.awt.Insets(2, 10, 2, 6));
         passwordTextField.setName("passwordField"); // NOI18N
+        passwordTextField.setNextFocusableComponent(loginBtn);
         passwordTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwordTextFieldFocusGained(evt);
@@ -184,6 +189,7 @@ public class Login extends javax.swing.JFrame {
         loginBtn.setBackground(new java.awt.Color(154, 2, 21));
         loginBtn.setFont(new java.awt.Font("Roboto", 1, 21)); // NOI18N
         loginBtn.setLabel("Login");
+        loginBtn.setNextFocusableComponent(emailTextField);
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginBtnActionPerformed(evt);
@@ -319,8 +325,32 @@ public class Login extends javax.swing.JFrame {
             return; // Exit the method
         }
         
-        // If both inputs are provided, proceed to login.
+        try {
+            // If both inputs are provided, proceed to login.
+            boolean isLoginSuccess = AuthService.login(email, password);
+            
+            // If passwords doesn't match
+            if(!isLoginSuccess) {
+                Messages.showError(this, "Incorrect Password", "The password you entered is invalid");
+                return;
+            }
+            
+            // If none of the errors haven't occured
+            // Show the login form asynchronously
+            SwingUtilities.invokeLater(() -> {
+                FormManager.ShowForm(FormManager.getDashboardForm(), this);
+            });
+        } 
         
+        // If a user with the given email cannot be found
+        catch (NotFoundError ex) {
+            Messages.showError(this, "Email Not Registered", "The entered email is not associated with any user");
+        } 
+        
+        // If an unexpected error has been occured
+        catch (ApplicationError ex) {
+            Messages.showError(this, "Unexpected Error", "An unexpected error has been occured");
+        }
     }//GEN-LAST:event_loginBtnActionPerformed
 
     // Bring the focus to the main form in order to focus out the input fields.

@@ -1,22 +1,121 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package dev.shanuka.thesweetcupcakeshop.view.forms;
 
+import dev.shanuka.thesweetcupcakeshop.enums.UserRole;
+import dev.shanuka.thesweetcupcakeshop.service.AuthService;
+import dev.shanuka.thesweetcupcakeshop.util.Fonts;
+import dev.shanuka.thesweetcupcakeshop.util.FormManager;
+import dev.shanuka.thesweetcupcakeshop.view.panels.dashboard.DashboardPanel;
+import dev.shanuka.thesweetcupcakeshop.view.panels.dashboard.InventoryPanel;
+import dev.shanuka.thesweetcupcakeshop.view.panels.dashboard.SalesPanel;
+import dev.shanuka.thesweetcupcakeshop.view.panels.dashboard.UsersPanel;
+import java.awt.Color;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 /**
- *
- * @author Nethmina
+ * User dashboard for both MANAGER and CASHIER
+ * 
+ * @author Shanuka
  */
 public class Dashboard extends javax.swing.JFrame {
-    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Dashboard.class.getName());
 
+    // Background colors for active and inactive sideNav buttons
+    private final Color BUTTON_BG = new Color(48,19,21);
+    private final Color BUTTON_BG_ACTIVE = new Color(97,11,21);
+
+    // Dashboard views (panels to be mounted when different sideNav buttons are clicked)
+    private JPanel DashboardView;
+    private JPanel SalesView;
+    private JPanel InventoryView;
+    private JPanel UsersView;
+    
+    // Getter for user dashboard panels
+    private JPanel getView(View view) {
+        switch (view) {
+            case DASHBOARD:
+                if(DashboardView == null) DashboardView = new DashboardPanel(this);
+                return DashboardView;
+                
+            case MANAGE_SALES:
+                if(SalesView == null) SalesView = new SalesPanel();
+                return SalesView;
+                
+            case MANAGE_ITEMS:
+                if(InventoryView == null) InventoryView = new InventoryPanel();
+                return InventoryView;
+                
+            case MANAGE_USERS:
+                if(UsersView == null) UsersView = new UsersPanel();
+                return UsersView;
+             
+            default:
+                return null;
+        }
+    }
+    
+    private final List<JButton> sideNavBtns;
+    
+    private View activeView = View.DASHBOARD;
+    
+    private void setActiveView(View view) {
+        activeView = view;
+        
+        switch (activeView) {
+            case DASHBOARD:
+                resetButtonBackgrounds();
+                dashboardBtn.setBackground(BUTTON_BG_ACTIVE);
+                FormManager.setContentPanel(contentPanel, getView(View.DASHBOARD));
+                break;
+                
+            case MANAGE_SALES:
+                resetButtonBackgrounds();
+                manageSalesBtn.setBackground(BUTTON_BG_ACTIVE);
+                FormManager.setContentPanel(contentPanel, getView(View.MANAGE_SALES));
+                break;
+                
+            case MANAGE_ITEMS:
+                resetButtonBackgrounds();
+                manageItemsBtn.setBackground(BUTTON_BG_ACTIVE);
+                FormManager.setContentPanel(contentPanel, getView(View.MANAGE_ITEMS));
+                break;
+                
+            default:
+                resetButtonBackgrounds();
+                manageUsersBtn.setBackground(BUTTON_BG_ACTIVE);
+                FormManager.setContentPanel(contentPanel, getView(View.MANAGE_USERS));
+        }
+    }
+    
+    private void resetButtonBackgrounds() {
+        for (JButton btn : sideNavBtns) {
+            btn.setBackground(BUTTON_BG); // Set to default color
+        }
+    }
+    
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
         initComponents();
+        
+        // Set the application icon
+        FormManager.setAppIcon(this);
+        
+        // Set DashboardView as the default content view
+        FormManager.setContentPanel(contentPanel, getView(View.DASHBOARD));
+        
+        // Initialize the list of sideNav buttons to be used later within resetButtonBackgrounds
+        sideNavBtns = List.of(dashboardBtn, manageSalesBtn, manageItemsBtn, manageUsersBtn);
+        
+        // Apply custom fonts to different components
+        manageSalesBtn.setFont(Fonts.robotoRegular.deriveFont(20f));
+        
+        // Hide MANAGER specific features to the CASHIER
+        if(AuthService.loggedUser.getRole() == UserRole.CASHIER) {
+            manageUsersBtn.setVisible(false);
+        }
     }
 
     /**
@@ -27,29 +126,222 @@ public class Dashboard extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        mainPanel = new javax.swing.JPanel();
+        sideNav = new javax.swing.JPanel();
+        logo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        dashboardBtn = new javax.swing.JButton();
+        manageSalesBtn = new javax.swing.JButton();
+        manageItemsBtn = new javax.swing.JButton();
+        manageUsersBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
+        contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(244, 244, 244));
+        setMaximumSize(new java.awt.Dimension(1600, 900));
+        setMinimumSize(new java.awt.Dimension(1600, 900));
+        setResizable(false);
 
-        mainPanel.setBackground(new java.awt.Color(255, 252, 239));
-        mainPanel.setForeground(new java.awt.Color(255, 252, 239));
+        sideNav.setBackground(new java.awt.Color(48, 19, 21));
+        sideNav.setMaximumSize(new java.awt.Dimension(387, 900));
+        sideNav.setMinimumSize(new java.awt.Dimension(387, 900));
+        sideNav.setPreferredSize(new java.awt.Dimension(387, 900));
+        sideNav.setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+        logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/logo.png"))); // NOI18N
+        logo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        logo.setAlignmentY(0.0F);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 40;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(70, 0, 0, 0);
+        sideNav.add(logo, gridBagConstraints);
+
+        jPanel1.setBackground(new java.awt.Color(48, 19, 21));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.weighty = 1.0;
+        sideNav.add(jPanel1, gridBagConstraints);
+
+        dashboardBtn.setBackground(new java.awt.Color(97, 11, 21));
+        dashboardBtn.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        dashboardBtn.setForeground(new java.awt.Color(172, 161, 161));
+        dashboardBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/side_nav/dashboard.png"))); // NOI18N
+        dashboardBtn.setText("Dashboard");
+        dashboardBtn.setBorder(null);
+        dashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        dashboardBtn.setIconTextGap(12);
+        dashboardBtn.setMaximumSize(new java.awt.Dimension(387, 80));
+        dashboardBtn.setMinimumSize(new java.awt.Dimension(387, 80));
+        dashboardBtn.setPreferredSize(new java.awt.Dimension(387, 80));
+        dashboardBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dashboardBtnActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
+        sideNav.add(dashboardBtn, gridBagConstraints);
+
+        manageSalesBtn.setBackground(new java.awt.Color(48, 19, 21));
+        manageSalesBtn.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        manageSalesBtn.setForeground(new java.awt.Color(172, 161, 161));
+        manageSalesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/side_nav/manage_sales.png"))); // NOI18N
+        manageSalesBtn.setText("Manage Sales");
+        manageSalesBtn.setBorder(null);
+        manageSalesBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        manageSalesBtn.setIconTextGap(12);
+        manageSalesBtn.setMaximumSize(new java.awt.Dimension(387, 80));
+        manageSalesBtn.setMinimumSize(new java.awt.Dimension(387, 80));
+        manageSalesBtn.setPreferredSize(new java.awt.Dimension(387, 80));
+        manageSalesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageSalesBtnActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 20;
+        sideNav.add(manageSalesBtn, gridBagConstraints);
+
+        manageItemsBtn.setBackground(new java.awt.Color(48, 19, 21));
+        manageItemsBtn.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        manageItemsBtn.setForeground(new java.awt.Color(172, 161, 161));
+        manageItemsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/side_nav/manage_items.png"))); // NOI18N
+        manageItemsBtn.setText("Manage Items");
+        manageItemsBtn.setBorder(null);
+        manageItemsBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        manageItemsBtn.setIconTextGap(12);
+        manageItemsBtn.setMaximumSize(new java.awt.Dimension(387, 80));
+        manageItemsBtn.setMinimumSize(new java.awt.Dimension(387, 80));
+        manageItemsBtn.setPreferredSize(new java.awt.Dimension(387, 80));
+        manageItemsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageItemsBtnActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 20;
+        sideNav.add(manageItemsBtn, gridBagConstraints);
+
+        manageUsersBtn.setBackground(new java.awt.Color(48, 19, 21));
+        manageUsersBtn.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        manageUsersBtn.setForeground(new java.awt.Color(172, 161, 161));
+        manageUsersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/side_nav/manage_users.png"))); // NOI18N
+        manageUsersBtn.setText("Manage Users");
+        manageUsersBtn.setBorder(null);
+        manageUsersBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        manageUsersBtn.setIconTextGap(12);
+        manageUsersBtn.setMaximumSize(new java.awt.Dimension(387, 80));
+        manageUsersBtn.setMinimumSize(new java.awt.Dimension(387, 80));
+        manageUsersBtn.setPreferredSize(new java.awt.Dimension(387, 80));
+        manageUsersBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageUsersBtnActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 20;
+        sideNav.add(manageUsersBtn, gridBagConstraints);
+
+        logoutBtn.setBackground(new java.awt.Color(48, 19, 21));
+        logoutBtn.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        logoutBtn.setForeground(new java.awt.Color(172, 161, 161));
+        logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/side_nav/logout.png"))); // NOI18N
+        logoutBtn.setText("Logout");
+        logoutBtn.setBorder(null);
+        logoutBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        logoutBtn.setIconTextGap(12);
+        logoutBtn.setMaximumSize(new java.awt.Dimension(387, 80));
+        logoutBtn.setMinimumSize(new java.awt.Dimension(387, 80));
+        logoutBtn.setPreferredSize(new java.awt.Dimension(387, 80));
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 24, 0);
+        sideNav.add(logoutBtn, gridBagConstraints);
+
+        getContentPane().add(sideNav, java.awt.BorderLayout.WEST);
+
+        contentPanel.setBackground(new java.awt.Color(244, 244, 244));
+        contentPanel.setPreferredSize(new java.awt.Dimension(1213, 900));
+
+        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+        contentPanel.setLayout(contentPanelLayout);
+        contentPanelLayout.setHorizontalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1213, Short.MAX_VALUE)
+        );
+        contentPanelLayout.setVerticalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(contentPanel, java.awt.BorderLayout.EAST);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    // Event: When "Dashboard" button is clicked
+    private void dashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardBtnActionPerformed
+        setActiveView(View.DASHBOARD);
+    }//GEN-LAST:event_dashboardBtnActionPerformed
+
+    // Event: When "Manage Sales" button is clicked
+    private void manageSalesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageSalesBtnActionPerformed
+        setActiveView(View.MANAGE_SALES);
+    }//GEN-LAST:event_manageSalesBtnActionPerformed
+
+    // Event: When "Manage Items" button is clicked
+    private void manageItemsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageItemsBtnActionPerformed
+        setActiveView(View.MANAGE_ITEMS);
+    }//GEN-LAST:event_manageItemsBtnActionPerformed
+
+    // Event: When "Manage Users" button is clicked
+    private void manageUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUsersBtnActionPerformed
+        setActiveView(View.MANAGE_USERS);
+    }//GEN-LAST:event_manageUsersBtnActionPerformed
+
+    // Event: When "Logout" button is clicked
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        // Logout the user
+        AuthService.logout();
+        
+        // Show the login form and dispose the current form
+        FormManager.ShowForm(FormManager.getLoginForm(), this, true);
+    }//GEN-LAST:event_logoutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -76,7 +368,22 @@ public class Dashboard extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new Dashboard().setVisible(true));
     }
 
+    private enum View {
+        DASHBOARD,
+        MANAGE_SALES,
+        MANAGE_ITEMS,
+        MANAGE_USERS
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton dashboardBtn;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel logo;
+    private javax.swing.JButton logoutBtn;
+    private javax.swing.JButton manageItemsBtn;
+    private javax.swing.JButton manageSalesBtn;
+    private javax.swing.JButton manageUsersBtn;
+    private javax.swing.JPanel sideNav;
     // End of variables declaration//GEN-END:variables
 }

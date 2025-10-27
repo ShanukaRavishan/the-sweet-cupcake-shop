@@ -1,26 +1,53 @@
 package dev.shanuka.thesweetcupcakeshop.model;
 
+import dev.shanuka.thesweetcupcakeshop.enums.UserRole;
+
 /**
- * Model that represents a user within the system.
- * 
+ * Model that represents a user within the system
+ *
  * @author Shanuka
  */
 public class User {
     private Integer id;
+    private UserRole role;
     private String firstName;
     private String lastName;
     private String email;
-    private String passwordHash;
-    private String salt;
+    private String password;
 
-    public User() { }
+    public User() {
+    }
 
-    public User(Integer id, String firstName, String lastName, String email, String passwordHash, String salt) {
+    public User(Integer id, UserRole role, String firstName, String lastName, String email, String password) {
         this.id = id;
+        this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.passwordHash = passwordHash;
-        this.salt = salt;
+        this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public String getfirstName() {
+        return firstName;
+    }
+    
+    public String getlastName() {
+        return lastName;
+    }
+    
+    public String getemail() {
+        return email;
+    }
+    
+    public String getpassword() {
+        return password;
     }
 }

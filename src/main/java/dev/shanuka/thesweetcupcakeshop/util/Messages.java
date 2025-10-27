@@ -20,7 +20,7 @@ public class Messages {
      */
     public static void showError(JFrame parent, String title, String message) {
         JLabel label = new JLabel(message);
-        label.putClientProperty(FlatClientProperties.STYLE, "font: 14 'Noto Sans'; foreground: #222831; margin-left: 0;");
+        label.putClientProperty(FlatClientProperties.STYLE, "font: 14 'Noto Sans'; foreground: #222831;");
 
         JOptionPane.showMessageDialog(
                 parent,
@@ -28,5 +28,14 @@ public class Messages {
                 title,
                 JOptionPane.ERROR_MESSAGE
         );
+    }
+    
+    /**
+     * Displays an application error message popup.
+     * 
+     * @param parent Parent form that the message is shown from.
+     */
+    public static void showApplicationError(JFrame parent, String title, String message) {
+        showError(parent, "Application Error", "An unexpected error has occurred.");
     }
 }

@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 /**
  * Utility class for managing placeholders of text fields.
  * 
- * @author Nethmina
+ * @author Shanuka
  */
 public class PlaceholderManager {
     private static Map<String, String> placeholders = new HashMap<String, String>();

@@ -1,0 +1,28 @@
+------- OBJECT -------
+id: 1
+date: 2025-10-22T14:45:10.123Z
+item: Rich Chocolate
+itemPrice: 300.0
+quantity: 2
+totalAmount: 600.0
+------- OBJECT -------
+id: 2
+date: 2025-10-22T14:50:22.456Z
+item: Classic Vanilla
+itemPrice: 250.0
+quantity: 4
+totalAmount: 1000.0
+------- OBJECT -------
+id: 3
+date: 2025-10-22T14:52:05.789Z
+item: Red Velvet
+itemPrice: 350.0
+quantity: 1
+totalAmount: 350.0
+------- OBJECT -------
+id: 4
+date: 2025-10-22T14:55:15.321Z
+item: Fruity Delight
+itemPrice: 320.0
+quantity: 3
+totalAmount: 960.0

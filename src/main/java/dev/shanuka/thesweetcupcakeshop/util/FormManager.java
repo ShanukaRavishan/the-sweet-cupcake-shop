@@ -5,64 +5,126 @@ import dev.shanuka.thesweetcupcakeshop.view.forms.Login;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Manages the lifecycle and navigation of all JFrames in the application.
- * 
+ *
  * @author Shanuka
  */
 public class FormManager {
+
     // Static fields to store forms
     private static JFrame LoginForm;
     private static JFrame DashboardForm;
-    
-    private FormManager() {}
+
+    private FormManager() {
+    }
 
     /**
      * Gets the instance of Login JFrame.
      */
     public static JFrame getLoginForm() {
-        if(LoginForm == null) LoginForm = new Login();
+        if (LoginForm == null) {
+            LoginForm = new Login();
+        }
         return LoginForm;
     }
-    
+
     /**
      * Gets the instance of Dashboard JFrame.
      */
     public static JFrame getDashboardForm() {
-        if(DashboardForm == null) DashboardForm = new Dashboard();
+        if (DashboardForm == null) {
+            DashboardForm = new Dashboard();
+        }
         return DashboardForm;
     }
-    
+
     /**
-     * Shows a target form and optionally hides the current form.
+     * Shows a target form and centers it on the screen. Neither hides the
+     * current form not disposes it
      *
-     * @param targetForm  JFrame that should be shown.
-     * @param currentForm JFrame to be hidden (Optional).
-     * If empty, no form will be hidden.
+     * @param targetForm JFrame that should be shown
+     */
+    public static void ShowForm(JFrame targetForm) {
+        ShowForm(targetForm, null, false);
+    }
+
+    /**
+     * Shows a target form and hides the current form without disposing the
+     * currentForm
+     *
+     * @param targetForm JFrame that should be shown
+     * @param currentForm JFrame to be hidden
      */
     public static void ShowForm(JFrame targetForm, JFrame currentForm) {
-        // If a current form exists, position the new form over it.
+        ShowForm(targetForm, currentForm, false);
+    }
+
+    /**
+     * Shows a target form and optionally hides or disposes the current form
+     *
+     * @param targetForm JFrame that should be shown
+     * @param currentForm JFrame to be hidden or disposed
+     * @param disposeCurrent If true, the currentForm will be disposed
+     */
+    public static void ShowForm(JFrame targetForm, JFrame currentForm, boolean disposeCurrent) {
+        // If a current form exists, position the new form over it
         if (currentForm != null) {
-            targetForm.setLocationRelativeTo(currentForm); 
-        } 
-        
-        // Otherwise, center the target form on the screen.
+            targetForm.setLocationRelativeTo(currentForm);
+        } // Otherwise center the target form on the screen
         else {
             targetForm.setLocationRelativeTo(null);
         }
 
-        targetForm.setVisible(true); // Make the target form visible.
+        targetForm.setVisible(true); // Make the target form visible
 
-        // Hide the current form if it was provided.
+        // Hide or dispose the current form if it was provided
         if (currentForm != null) {
-            currentForm.setVisible(false);
+            if (disposeCurrent) {
+                currentForm.dispose(); // Dispose the form (releases resources)
+
+                // Nullify the static reference so getForm() can create a new one next time
+                if (currentForm instanceof Login) {
+                    LoginForm = null;
+                } else if (currentForm instanceof Dashboard) {
+                    DashboardForm = null;
+                }
+
+            } else {
+                currentForm.setVisible(false); // Just hide the form
+            }
         }
     }
-    
+
+    /**
+     * Clears a container panel and sets a new panel as its content
+     * 
+     * Removes all existing components from the container, sets its layout to BorderLayout, 
+     * and add the new content panel to the CENTER, which makes it fill the container
+     *
+     * @param container The JPanel to be cleared and updated
+     * @param newContent The new JPanel to be displayed
+     */
+    public static void setContentPanel(javax.swing.JPanel container, javax.swing.JPanel newContent) {
+        // Clear all components from the container panel
+        container.removeAll();
+
+        // Set the layout
+        container.setLayout(new java.awt.BorderLayout());
+
+        // Add the new panel to fill the center
+        container.add(newContent, java.awt.BorderLayout.CENTER);
+
+        // Revalidate and repaint the container to show the changes
+        container.revalidate();
+        container.repaint();
+    }
+
     /**
      * Sets the application icon for a JFrame.
-     * 
+     *
      * @param form JFrame that the icon must be applied to.
      */
     public static void setAppIcon(JFrame form) {

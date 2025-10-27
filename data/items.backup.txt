@@ -1,0 +1,180 @@
+------- OBJECT -------
+id: 1
+name: Rich Chocolate Cupcake
+price: 300.0
+------- OBJECT -------
+id: 2
+name: Classic Vanilla Cupcake
+price: 250.0
+------- OBJECT -------
+id: 3
+name: Red Velvet Cupcake
+price: 350.0
+------- OBJECT -------
+id: 4
+name: Fruity Delight Cupcake
+price: 320.0
+------- OBJECT -------
+id: 5
+name: Strawberry Swirl Cupcake
+price: 280.0
+------- OBJECT -------
+id: 6
+name: Fudgy Chocolate Brownie
+price: 380.0
+------- OBJECT -------
+id: 7
+name: New York Cheesecake Slice
+price: 450.0
+------- OBJECT -------
+id: 8
+name: Caramel Drizzle Cupcake
+price: 310.0
+------- OBJECT -------
+id: 9
+name: Lemon Zest Cupcake
+price: 290.0
+------- OBJECT -------
+id: 10
+name: Cookies and Cream Cupcake
+price: 330.0
+------- OBJECT -------
+id: 11
+name: Classic Chocolate Eclair
+price: 260.0
+------- OBJECT -------
+id: 12
+name: Blueberry Bliss Cupcake
+price: 300.0
+------- OBJECT -------
+id: 13
+name: Apple Crumble (Warm)
+price: 420.0
+------- OBJECT -------
+id: 14
+name: Mocha Magic Cupcake
+price: 340.0
+------- OBJECT -------
+id: 15
+name: Peanut Butter Cupcake
+price: 350.0
+------- OBJECT -------
+id: 16
+name: Tiramisu Slice
+price: 480.0
+------- OBJECT -------
+id: 17
+name: Salted Caramel Brownie
+price: 400.0
+------- OBJECT -------
+id: 18
+name: Raspberry White Chocolate Cupcake
+price: 360.0
+------- OBJECT -------
+id: 19
+name: French Macaron (Single)
+price: 150.0
+------- OBJECT -------
+id: 20
+name: Glazed Donut
+price: 200.0
+------- OBJECT -------
+id: 21
+name: Pistachio Rose Cupcake
+price: 380.0
+------- OBJECT -------
+id: 22
+name: Choco Lava Cake
+price: 450.0
+------- OBJECT -------
+id: 23
+name: Mint Chocolate Chip Cupcake
+price: 330.0
+------- OBJECT -------
+id: 24
+name: Cinnamon Roll
+price: 350.0
+------- OBJECT -------
+id: 25
+name: Black Forest Cupcake
+price: 360.0
+------- OBJECT -------
+id: 26
+name: Coconut Cream Cupcake
+price: 310.0
+------- OBJECT -------
+id: 27
+name: Belgian Waffle (Single)
+price: 500.0
+------- OBJECT -------
+id: 28
+name: Mango Passionfruit Cupcake
+price: 340.0
+------- OBJECT -------
+id: 29
+name: Pineapple Upside-Down Cupcake
+price: 320.0
+------- OBJECT -------
+id: 30
+name: Chocolate Truffle
+price: 180.0
+------- OBJECT -------
+id: 31
+name: S'mores Cupcake
+price: 370.0
+------- OBJECT -------
+id: 32
+name: Banana Bread Slice
+price: 280.0
+------- OBJECT -------
+id: 33
+name: Pumpkin Spice Cupcake
+price: 350.0
+------- OBJECT -------
+id: 34
+name: Cherry Cheesecake Slice
+price: 460.0
+------- OBJECT -------
+id: 35
+name: Almond Croissant
+price: 400.0
+------- OBJECT -------
+id: 36
+name: Lavender Honey Cupcake
+price: 380.0
+------- OBJECT -------
+id: 37
+name: Classic Fudge Slice
+price: 300.0
+------- OBJECT -------
+id: 38
+name: Rainbow Sprinkle Cupcake
+price: 300.0
+------- OBJECT -------
+id: 39
+name: Italian Cannoli
+price: 390.0
+------- OBJECT -------
+id: 40
+name: Matcha Green Tea Cupcake
+price: 360.0
+------- OBJECT -------
+id: 41
+name: Carrot Cake Slice
+price: 430.0
+------- OBJECT -------
+id: 42
+name: Nutella-Stuffed Cupcake
+price: 380.0
+------- OBJECT -------
+id: 43
+name: Key Lime Pie Slice
+price: 440.0
+------- OBJECT -------
+id: 44
+name: Gingerbread Man Cookie
+price: 220.0
+------- OBJECT -------
+id: 45
+name: Orange Cranberry Cupcake
+price: 340.0

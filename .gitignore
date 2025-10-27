@@ -1,0 +1,74 @@
+# Compiled class files
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+
+# BlueJ files
+*.ctxt
+
+# Package Files #
+*.zip
+*.tar.gz
+*.rar
+
+# Maven target directory
+/target/
+*/target/
+
+# Maven build artifacts
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# IDE specific files
+# ------------------
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/build/
+manifest.mf
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# VS Code
+.vscode/
+
+# MacOS / Linux / Windows junk
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Backup and environment
+*.orig
+*.rej
+*.bak
+*.tmp
+*.old
+*.swp
+
+# Custom library folder (optional, if using a local lib directory)
+lib/
