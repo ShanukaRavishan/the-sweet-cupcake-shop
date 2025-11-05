@@ -6,7 +6,6 @@ import dev.shanuka.thesweetcupcakeshop.exception.NotFoundError;
 import dev.shanuka.thesweetcupcakeshop.model.Order;
 import dev.shanuka.thesweetcupcakeshop.util.DataStore;
 import dev.shanuka.thesweetcupcakeshop.util.Helpers;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,15 +22,12 @@ public final class OrderService {
     private OrderService() { }
 
     /**
-     * Creates a new order and adds it to the data store
-     * The ID, Date, and TotalAmount are calculated automatically
+     * Adds a new order to the data store
      *
-     * @param item The name of the item being ordered
-     * @param itemPrice The price of a single item
-     * @param quantity The number of items
-     * @throws ApplicationError if data retrieval or saving fails
+     * @param newOrder New order data
+     * @throws ApplicationError if data saving fails
      */
-    public static void addOrder(String item, Double itemPrice, Integer quantity) throws ApplicationError {
+    public static void saveOrderData(Order newOrder) throws ApplicationError {
         // Get all existing order IDs using a stream
         List<Integer> orderIds = getAllOrders().stream()
                 .map(Order::getId)
@@ -39,16 +35,7 @@ public final class OrderService {
 
         // Generate the next available ID
         int newId = Helpers.generateNextAvailableId(orderIds);
-
-        // Set the order date to the current time
-        Date orderDate = new Date();
-
-        // Calculate the total amount
-        Double totalAmount = itemPrice * quantity;
-
-        // Create the new Order object
-        Order newOrder = new Order(newId, orderDate, item, itemPrice, quantity, totalAmount);
-
+        
         // Add the new order to the data store
         dataStore.add(newOrder);
     }
@@ -67,18 +54,6 @@ public final class OrderService {
                 .filter(order -> order.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new NotFoundError(String.format("An order with ID %d cannot be found.", id)));
-    }
-
-    /**
-     * Removes an order from the data store based on its ID
-     * (Assumes DataStore has a 'remove' method)
-     *
-     * @param orderId The ID of the order to be removed
-     * @throws ApplicationError if the data operation fails
-     * @throws NotFoundError if the item to remove is not found
-     */
-    public static void removeOrder(Integer orderId) throws ApplicationError, NotFoundError {
-        dataStore.remove("id", orderId);
     }
 
     /**

@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -58,6 +60,8 @@ public class DataStore<T> {
                 "data/users.txt";
             case DataFile.ITEMS ->
                 "data/items.txt";
+            case DataFile.CATEGORIES ->
+                "data/categories.txt";
             case DataFile.ORDERS ->
                 "data/orders.txt";
             default ->
@@ -72,63 +76,6 @@ public class DataStore<T> {
         retrievedData.add(object);
 
         // Save the updated list of objects
-        saveData(retrievedData);
-    }
-    
-    // Find a matching object by matching a field and a possible value for it
-    private T findMatchingObject(String fieldName, Object fieldValue) throws ApplicationError, NotFoundError {
-        // Retrieve the list of objects
-        List<T> retrievedData = retrieveData();
-        
-        // Search each object within retrievedData to find a matching one
-        for (T object : retrievedData) {
-            try {
-                // Retrieve the field with given fieldName
-                Field field = type.getDeclaredField(fieldName);
-                
-                // Make the field accessible
-                field.setAccessible(true);
-                
-                // Retrieve the field's value and compare it with the given value
-                Object value = field.get(object);
-                
-                // If the value within the field matches given value
-                if(value.equals(fieldValue)) {
-                    return object;
-                }
-            } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException ex) {
-                throw new ApplicationError(String.format("Error while finding and removing the object with %s is set to %s.", fieldName, fieldValue), ex);
-            }}
-            
-        // Throw an error if no object matches the given field : value
-        throw new NotFoundError(String.format("An object with \"%s\" is set to \"%s\" cannot be found.", fieldName, fieldValue));
-    }
-    
-    public void update(String fieldName, Object fieldValue, T newObject) throws ApplicationError, NotFoundError {
-        List<T> retrievedData = retrieveData();
-
-        // Find the matching object
-        T match = findMatchingObject(fieldName, fieldValue);
-        
-        // Replace the matching object
-        int index = retrievedData.indexOf(match);
-        retrievedData.remove(match);
-        retrievedData.add(index, newObject);
-                    
-        // Update the data file
-        saveData(retrievedData);
-    }
-
-    public void remove(String fieldName, Object fieldValue) throws ApplicationError, NotFoundError {
-        List<T> retrievedData = retrieveData();
-
-        // Find the matching object
-        T match = findMatchingObject(fieldName, fieldValue);
-        
-        // Delete the matching object
-        retrievedData.remove(match);
-                    
-        // Update the data file
         saveData(retrievedData);
     }
 
@@ -158,6 +105,14 @@ public class DataStore<T> {
                 String name = field.getName();
                 Object value = field.get(object);
 
+                // Format Date fields as ISO UTC
+                if (value instanceof Date) {
+                    SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                    isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    
+                    value = isoFormat.format((Date) value);
+                }
+                
                 // Append the formatted "key: value" line
                 sb.append(name)
                         .append(": ")

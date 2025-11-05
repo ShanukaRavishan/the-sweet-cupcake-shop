@@ -1,8 +1,22 @@
 package dev.shanuka.thesweetcupcakeshop.util;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.util.Collection;
+import java.util.EventObject;
 import java.util.Set;
 import java.util.TreeSet;
+import javax.swing.AbstractCellEditor;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 
 /**
  * A utility class providing common static helper functions for the application
@@ -55,5 +69,59 @@ public final class Helpers {
 
         // If no gap was found, expectedId will be max id + 1
         return expectedId;
+    }
+    
+    /**
+     * Applies a set of styles to the given table
+     *
+     * @param table Table to stylize
+     */
+    public static void formatTable(JTable table) {
+        // Our custom renderer will pull these settings
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(Color.WHITE);
+        header.setPreferredSize(new Dimension(0, 40));
+        header.setReorderingAllowed(false);
+        header.setForeground(new Color(66, 66, 66));
+        header.setFont(Fonts.robotoMedium.deriveFont(16f));
+
+        // Create and set a custom header renderer to remove vertical lines between columns
+        DefaultTableCellRenderer customHeaderRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(
+                    JTable table, Object value, boolean isSelected,
+                    boolean hasFocus, int row, int column) {
+
+                Component c = super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+
+                // Apply settings from the header object
+                c.setBackground(header.getBackground());
+                c.setForeground(header.getForeground());
+                c.setFont(header.getFont());
+
+                if (c instanceof javax.swing.JLabel) {
+                    JLabel label = (javax.swing.JLabel) c;
+
+                    // Replace the default border
+                    label.setBorder(new EmptyBorder(0, 4, 0, 0));
+
+                    // Set alignment
+                    label.setHorizontalAlignment(SwingConstants.LEFT);
+                }
+                return c;
+            }
+        };
+
+        // Set this as the new default renderer for the header
+        table.getTableHeader().setDefaultRenderer(customHeaderRenderer);
+
+        // Configure cell renderer
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+        cellRenderer.setFont(Fonts.robotoRegular.deriveFont(16f));
+        table.setDefaultRenderer(String.class, cellRenderer); // Apply to all String columns
+
+        // Set data row height to match padding
+        table.setRowHeight(35);
     }
 }

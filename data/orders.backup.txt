@@ -1,28 +1,490 @@
 ------- OBJECT -------
-id: 1
-date: 2025-10-22T14:45:10.123Z
-item: Rich Chocolate
-itemPrice: 300.0
-quantity: 2
-totalAmount: 600.0
-------- OBJECT -------
-id: 2
-date: 2025-10-22T14:50:22.456Z
-item: Classic Vanilla
-itemPrice: 250.0
+id: 75
+date: 2025-10-27T09:00:00.111Z
+item: Pumpkin Spice Cupcake
+itemPrice: 350.0
 quantity: 4
+totalAmount: 1400.0
+------- OBJECT -------
+id: 76
+date: 2025-10-27T10:15:00.222Z
+item: Tiramisu Slice
+itemPrice: 480.0
+quantity: 2
+totalAmount: 960.0
+------- OBJECT -------
+id: 77
+date: 2025-11-01T11:30:00.333Z
+item: Classic Vanilla Cupcake
+itemPrice: 250.0
+quantity: 1
+totalAmount: 250.0
+------- OBJECT -------
+id: 78
+date: 2025-11-02T14:00:00.444Z
+item: Glazed Donut
+itemPrice: 200.0
+quantity: 5
 totalAmount: 1000.0
 ------- OBJECT -------
-id: 3
-date: 2025-10-22T14:52:05.789Z
-item: Red Velvet
+id: 79
+date: 2025-11-02T15:00:00.555Z
+item: Fudgy Chocolate Brownie
+itemPrice: 380.0
+quantity: 2
+totalAmount: 760.0
+------- OBJECT -------
+id: 80
+date: 2025-11-03T09:30:00.666Z
+item: Carrot Cake Slice
+itemPrice: 430.0
+quantity: 1
+totalAmount: 430.0
+------- OBJECT -------
+id: 81
+date: 2025-11-03T11:00:00.777Z
+item: Red Velvet Cupcake
+itemPrice: 350.0
+quantity: 3
+totalAmount: 1050.0
+------- OBJECT -------
+id: 82
+date: 2025-11-03T16:10:00.888Z
+item: Rich Chocolate Cupcake
+itemPrice: 300.0
+quantity: 1
+totalAmount: 300.0
+------- OBJECT -------
+id: 83
+date: 2025-11-04T10:00:00.999Z
+item: Lemon Zest Cupcake
+itemPrice: 290.0
+quantity: 3
+totalAmount: 870.0
+------- OBJECT -------
+id: 84
+date: 2025-11-04T12:22:00.001Z
+item: Key Lime Pie Slice
+itemPrice: 440.0
+quantity: 1
+totalAmount: 440.0
+------- OBJECT -------
+id: 85
+date: 2025-11-05T09:05:00.112Z
+item: Cookies and Cream Cupcake
+itemPrice: 330.0
+quantity: 4
+totalAmount: 1320.0
+------- OBJECT -------
+id: 86
+date: 2025-11-05T13:30:00.223Z
+item: Classic Chocolate Eclair
+itemPrice: 260.0
+quantity: 2
+totalAmount: 520.0
+------- OBJECT -------
+id: 87
+date: 2025-11-06T11:11:00.334Z
+item: Apple Crumble (Warm)
+itemPrice: 420.0
+quantity: 1
+totalAmount: 420.0
+------- OBJECT -------
+id: 88
+date: 2025-11-06T14:40:00.445Z
+item: Blueberry Bliss Cupcake
+itemPrice: 300.0
+quantity: 3
+totalAmount: 900.0
+------- OBJECT -------
+id: 89
+date: 2025-11-07T09:50:00.556Z
+item: Peanut Butter Cupcake
+itemPrice: 350.0
+quantity: 2
+totalAmount: 700.0
+------- OBJECT -------
+id: 90
+date: 2025-11-07T10:00:00.667Z
+item: Salted Caramel Brownie
+itemPrice: 400.0
+quantity: 2
+totalAmount: 800.0
+------- OBJECT -------
+id: 91
+date: 2025-11-07T15:15:00.778Z
+item: French Macaron (Single)
+itemPrice: 150.0
+quantity: 8
+totalAmount: 1200.0
+------- OBJECT -------
+id: 92
+date: 2025-11-08T11:35:00.889Z
+item: Raspberry White Chocolate Cupcake
+itemPrice: 360.0
+quantity: 2
+totalAmount: 720.0
+------- OBJECT -------
+id: 93
+date: 2025-11-08T13:00:00.990Z
+item: Red Velvet Cupcake
 itemPrice: 350.0
 quantity: 1
 totalAmount: 350.0
 ------- OBJECT -------
-id: 4
-date: 2025-10-22T14:55:15.321Z
-item: Fruity Delight
-itemPrice: 320.0
+id: 94
+date: 2025-11-09T09:20:00.001Z
+item: Pistachio Rose Cupcake
+itemPrice: 380.0
 quantity: 3
+totalAmount: 1140.0
+------- OBJECT -------
+id: 95
+date: 2025-11-09T14:45:00.112Z
+item: Choco Lava Cake
+itemPrice: 450.0
+quantity: 1
+totalAmount: 450.0
+------- OBJECT -------
+id: 96
+date: 2025-11-10T10:10:00.223Z
+item: Mint Chocolate Chip Cupcake
+itemPrice: 330.0
+quantity: 2
+totalAmount: 660.0
+------- OBJECT -------
+id: 97
+date: 2025-11-10T11:20:00.334Z
+item: Cinnamon Roll
+itemPrice: 350.0
+quantity: 4
+totalAmount: 1400.0
+------- OBJECT -------
+id: 98
+date: 2025-11-11T13:00:00.445Z
+item: Black Forest Cupcake
+itemPrice: 360.0
+quantity: 1
+totalAmount: 360.0
+------- OBJECT -------
+id: 99
+date: 2025-11-11T14:30:00.556Z
+item: Belgian Waffle (Single)
+itemPrice: 500.0
+quantity: 2
+totalAmount: 1000.0
+------- OBJECT -------
+id: 100
+date: 2025-11-12T09:15:00.667Z
+item: Coconut Cream Cupcake
+itemPrice: 310.0
+quantity: 3
+totalAmount: 930.0
+------- OBJECT -------
+id: 101
+date: 2025-11-12T10:00:00.778Z
+item: Classic Vanilla Cupcake
+itemPrice: 250.0
+quantity: 1
+totalAmount: 250.0
+------- OBJECT -------
+id: 102
+date: 2025-11-12T16:05:00.889Z
+item: Mango Passionfruit Cupcake
+itemPrice: 340.0
+quantity: 2
+totalAmount: 680.0
+------- OBJECT -------
+id: 103
+date: 2025-11-13T11:11:00.990Z
+item: Pineapple Upside-Down Cupcake
+itemPrice: 320.0
+quantity: 1
+totalAmount: 320.0
+------- OBJECT -------
+id: 104
+date: 2025-11-13T12:00:00.001Z
+item: Chocolate Truffle
+itemPrice: 180.0
+quantity: 5
+totalAmount: 900.0
+------- OBJECT -------
+id: 105
+date: 2025-11-13T14:20:00.112Z
+item: S'mores Cupcake
+itemPrice: 370.0
+quantity: 2
+totalAmount: 740.0
+------- OBJECT -------
+id: 106
+date: 2025-11-14T09:00:00.223Z
+item: Banana Bread Slice
+itemPrice: 280.0
+quantity: 2
+totalAmount: 560.0
+------- OBJECT -------
+id: 107
+date: 2025-11-14T10:30:00.334Z
+item: Pumpkin Spice Cupcake
+itemPrice: 350.0
+quantity: 3
+totalAmount: 1050.0
+------- OBJECT -------
+id: 108
+date: 2025-11-14T15:00:00.445Z
+item: Cherry Cheesecake Slice
+itemPrice: 460.0
+quantity: 1
+totalAmount: 460.0
+------- OBJECT -------
+id: 109
+date: 2025-11-15T11:45:00.556Z
+item: Almond Croissant
+itemPrice: 400.0
+quantity: 2
+totalAmount: 800.0
+------- OBJECT -------
+id: 110
+date: 2025-11-15T13:10:00.667Z
+item: Lavender Honey Cupcake
+itemPrice: 380.0
+quantity: 1
+totalAmount: 380.0
+------- OBJECT -------
+id: 111
+date: 2025-11-16T09:25:00.778Z
+item: Classic Fudge Slice
+itemPrice: 300.0
+quantity: 3
+totalAmount: 900.0
+------- OBJECT -------
+id: 112
+date: 2025-11-16T14:00:00.889Z
+item: Rainbow Sprinkle Cupcake
+itemPrice: 300.0
+quantity: 4
+totalAmount: 1200.0
+------- OBJECT -------
+id: 113
+date: 2025-11-17T10:05:00.990Z
+item: Italian Cannoli
+itemPrice: 390.0
+quantity: 2
+totalAmount: 780.0
+------- OBJECT -------
+id: 114
+date: 2025-11-17T11:00:00.001Z
+item: Matcha Green Tea Cupcake
+itemPrice: 360.0
+quantity: 1
+totalAmount: 360.0
+------- OBJECT -------
+id: 115
+date: 2025-11-17T15:30:00.112Z
+item: Carrot Cake Slice
+itemPrice: 430.0
+quantity: 1
+totalAmount: 430.0
+------- OBJECT -------
+id: 116
+date: 2025-11-18T09:45:00.223Z
+item: Nutella-Stuffed Cupcake
+itemPrice: 380.0
+quantity: 3
+totalAmount: 1140.0
+------- OBJECT -------
+id: 117
+date: 2025-11-18T10:00:00.334Z
+item: Key Lime Pie Slice
+itemPrice: 440.0
+quantity: 2
+totalAmount: 880.0
+------- OBJECT -------
+id: 118
+date: 2025-11-18T14:10:00.445Z
+item: Gingerbread Man Cookie
+itemPrice: 220.0
+quantity: 2
+totalAmount: 440.0
+------- OBJECT -------
+id: 119
+date: 2025-11-19T11:00:00.556Z
+item: Orange Cranberry Cupcake
+itemPrice: 340.0
+quantity: 1
+totalAmount: 340.0
+------- OBJECT -------
+id: 120
+date: 2025-11-19T13:20:00.667Z
+item: Red Velvet Cupcake
+itemPrice: 350.0
+quantity: 2
+totalAmount: 700.0
+------- OBJECT -------
+id: 121
+date: 2025-11-19T15:00:00.778Z
+item: Rich Chocolate Cupcake
+itemPrice: 300.0
+quantity: 4
+totalAmount: 1200.0
+------- OBJECT -------
+id: 122
+date: 2025-11-20T09:10:00.889Z
+item: Classic Vanilla Cupcake
+itemPrice: 250.0
+quantity: 1
+totalAmount: 250.0
+------- OBJECT -------
+id: 123
+date: 2025-11-20T10:00:00.990Z
+item: Fudgy Chocolate Brownie
+itemPrice: 380.0
+quantity: 2
+totalAmount: 760.0
+------- OBJECT -------
+id: 124
+date: 2025-11-20T11:00:00.001Z
+item: New York Cheesecake Slice
+itemPrice: 450.0
+quantity: 1
+totalAmount: 450.0
+------- OBJECT -------
+id: 125
+date: 2025-11-20T14:30:00.112Z
+item: Strawberry Swirl Cupcake
+itemPrice: 280.0
+quantity: 3
+totalAmount: 840.0
+------- OBJECT -------
+id: 126
+date: 2025-11-21T09:00:00.223Z
+item: Glazed Donut
+itemPrice: 200.0
+quantity: 1
+totalAmount: 200.0
+------- OBJECT -------
+id: 127
+date: 2025-11-21T10:15:00.334Z
+item: Caramel Drizzle Cupcake
+itemPrice: 310.0
+quantity: 2
+totalAmount: 620.0
+------- OBJECT -------
+id: 128
+date: 2025-11-21T11:30:00.445Z
+item: Lemon Zest Cupcake
+itemPrice: 290.0
+quantity: 1
+totalAmount: 290.0
+------- OBJECT -------
+id: 129
+date: 2025-11-21T14:00:00.556Z
+item: Tiramisu Slice
+itemPrice: 480.0
+quantity: 2
 totalAmount: 960.0
+------- OBJECT -------
+id: 130
+date: 2025-11-21T16:00:00.667Z
+item: Cookies and Cream Cupcake
+itemPrice: 330.0
+quantity: 3
+totalAmount: 990.0
+------- OBJECT -------
+id: 131
+date: 2025-11-22T09:05:00.778Z
+item: Classic Chocolate Eclair
+itemPrice: 260.0
+quantity: 1
+totalAmount: 260.0
+------- OBJECT -------
+id: 132
+date: 2025-11-22T10:10:00.889Z
+item: Apple Crumble (Warm)
+itemPrice: 420.0
+quantity: 2
+totalAmount: 840.0
+------- OBJECT -------
+id: 133
+date: 2025-11-22T11:15:00.990Z
+item: Blueberry Bliss Cupcake
+itemPrice: 300.0
+quantity: 4
+totalAmount: 1200.0
+------- OBJECT -------
+id: 134
+date: 2025-11-22T12:00:00.001Z
+item: Peanut Butter Cupcake
+itemPrice: 350.0
+quantity: 1
+totalAmount: 350.0
+------- OBJECT -------
+id: 135
+date: 2025-11-23T14:00:00.112Z
+item: Salted Caramel Brownie
+itemPrice: 400.0
+quantity: 1
+totalAmount: 400.0
+------- OBJECT -------
+id: 136
+date: 2025-11-23T15:30:00.223Z
+item: French Macaron (Single)
+itemPrice: 150.0
+quantity: 6
+totalAmount: 900.0
+------- OBJECT -------
+id: 137
+date: 2025-11-24T09:20:00.334Z
+item: Raspberry White Chocolate Cupcake
+itemPrice: 360.0
+quantity: 2
+totalAmount: 720.0
+------- OBJECT -------
+id: 138
+date: 2025-11-24T10:00:00.445Z
+item: Red Velvet Cupcake
+itemPrice: 350.0
+quantity: 3
+totalAmount: 1050.0
+------- OBJECT -------
+id: 139
+date: 2025-11-25T11:10:00.556Z
+item: Pistachio Rose Cupcake
+itemPrice: 380.0
+quantity: 1
+totalAmount: 380.0
+------- OBJECT -------
+id: 140
+date: 2025-11-26T12:00:00.667Z
+item: Choco Lava Cake
+itemPrice: 450.0
+quantity: 2
+totalAmount: 900.0
+------- OBJECT -------
+id: 141
+date: 2025-11-27T14:00:00.778Z
+item: Mint Chocolate Chip Cupcake
+itemPrice: 330.0
+quantity: 1
+totalAmount: 330.0
+------- OBJECT -------
+id: 142
+date: 2025-11-28T15:05:00.889Z
+item: Cinnamon Roll
+itemPrice: 350.0
+quantity: 3
+totalAmount: 1050.0
+------- OBJECT -------
+id: 143
+date: 2025-11-29T09:00:00.990Z
+item: Black Forest Cupcake
+itemPrice: 360.0
+quantity: 2
+totalAmount: 720.0
+------- OBJECT -------
+id: 144
+date: 2025-11-30T16:00:00.001Z
+item: Belgian Waffle (Single)
+itemPrice: 500.0
+quantity: 1
+totalAmount: 500.0

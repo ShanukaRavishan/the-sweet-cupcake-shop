@@ -35,11 +35,11 @@ public class User {
         return role;
     }
 
-    public String getfirstName() {
+    public String getFirstName() {
         return firstName;
     }
     
-    public String getlastName() {
+    public String getLastName() {
         return lastName;
     }
     

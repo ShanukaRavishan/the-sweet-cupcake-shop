@@ -4,6 +4,7 @@ import dev.shanuka.thesweetcupcakeshop.enums.UserRole;
 import dev.shanuka.thesweetcupcakeshop.service.AuthService;
 import dev.shanuka.thesweetcupcakeshop.util.Fonts;
 import dev.shanuka.thesweetcupcakeshop.util.FormManager;
+import dev.shanuka.thesweetcupcakeshop.view.panels.dashboard.CategoriesPanel;
 import dev.shanuka.thesweetcupcakeshop.view.panels.dashboard.DashboardPanel;
 import dev.shanuka.thesweetcupcakeshop.view.panels.dashboard.InventoryPanel;
 import dev.shanuka.thesweetcupcakeshop.view.panels.dashboard.SalesPanel;
@@ -29,6 +30,7 @@ public class Dashboard extends javax.swing.JFrame {
     private JPanel DashboardView;
     private JPanel SalesView;
     private JPanel InventoryView;
+    private JPanel CategoriesView;
     private JPanel UsersView;
     
     // Getter for user dashboard panels
@@ -39,12 +41,16 @@ public class Dashboard extends javax.swing.JFrame {
                 return DashboardView;
                 
             case MANAGE_SALES:
-                if(SalesView == null) SalesView = new SalesPanel();
+                if(SalesView == null) SalesView = new SalesPanel(this);
                 return SalesView;
                 
             case MANAGE_ITEMS:
-                if(InventoryView == null) InventoryView = new InventoryPanel();
+                if(InventoryView == null) InventoryView = new InventoryPanel(this);
                 return InventoryView;
+                
+            case MANAGE_CATEGORIES:
+                if(CategoriesView == null) CategoriesView = new CategoriesPanel(this);
+                return CategoriesView;
                 
             case MANAGE_USERS:
                 if(UsersView == null) UsersView = new UsersPanel();
@@ -81,6 +87,12 @@ public class Dashboard extends javax.swing.JFrame {
                 FormManager.setContentPanel(contentPanel, getView(View.MANAGE_ITEMS));
                 break;
                 
+            case MANAGE_CATEGORIES:
+                resetButtonBackgrounds();
+                manageCategoriesBtn.setBackground(BUTTON_BG_ACTIVE);
+                FormManager.setContentPanel(contentPanel, getView(View.MANAGE_CATEGORIES));
+                break;
+                
             default:
                 resetButtonBackgrounds();
                 manageUsersBtn.setBackground(BUTTON_BG_ACTIVE);
@@ -107,7 +119,7 @@ public class Dashboard extends javax.swing.JFrame {
         FormManager.setContentPanel(contentPanel, getView(View.DASHBOARD));
         
         // Initialize the list of sideNav buttons to be used later within resetButtonBackgrounds
-        sideNavBtns = List.of(dashboardBtn, manageSalesBtn, manageItemsBtn, manageUsersBtn);
+        sideNavBtns = List.of(dashboardBtn, manageSalesBtn, manageItemsBtn, manageCategoriesBtn, manageUsersBtn);
         
         // Apply custom fonts to different components
         manageSalesBtn.setFont(Fonts.robotoRegular.deriveFont(20f));
@@ -134,6 +146,7 @@ public class Dashboard extends javax.swing.JFrame {
         dashboardBtn = new javax.swing.JButton();
         manageSalesBtn = new javax.swing.JButton();
         manageItemsBtn = new javax.swing.JButton();
+        manageCategoriesBtn = new javax.swing.JButton();
         manageUsersBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
@@ -248,6 +261,28 @@ public class Dashboard extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 20;
         sideNav.add(manageItemsBtn, gridBagConstraints);
 
+        manageCategoriesBtn.setBackground(new java.awt.Color(48, 19, 21));
+        manageCategoriesBtn.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        manageCategoriesBtn.setForeground(new java.awt.Color(172, 161, 161));
+        manageCategoriesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/side_nav/manage_categories.png"))); // NOI18N
+        manageCategoriesBtn.setBorder(null);
+        manageCategoriesBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        manageCategoriesBtn.setIconTextGap(12);
+        manageCategoriesBtn.setLabel("Manage Categories");
+        manageCategoriesBtn.setMaximumSize(new java.awt.Dimension(387, 80));
+        manageCategoriesBtn.setMinimumSize(new java.awt.Dimension(387, 80));
+        manageCategoriesBtn.setPreferredSize(new java.awt.Dimension(387, 80));
+        manageCategoriesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageCategoriesBtnActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 20;
+        sideNav.add(manageCategoriesBtn, gridBagConstraints);
+
         manageUsersBtn.setBackground(new java.awt.Color(48, 19, 21));
         manageUsersBtn.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         manageUsersBtn.setForeground(new java.awt.Color(172, 161, 161));
@@ -266,8 +301,9 @@ public class Dashboard extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         sideNav.add(manageUsersBtn, gridBagConstraints);
 
         logoutBtn.setBackground(new java.awt.Color(48, 19, 21));
@@ -343,6 +379,11 @@ public class Dashboard extends javax.swing.JFrame {
         FormManager.ShowForm(FormManager.getLoginForm(), this, true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
+    // Event: When "Manage Categories" button is clicked
+    private void manageCategoriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCategoriesBtnActionPerformed
+        setActiveView(View.MANAGE_CATEGORIES);
+    }//GEN-LAST:event_manageCategoriesBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,6 +413,7 @@ public class Dashboard extends javax.swing.JFrame {
         DASHBOARD,
         MANAGE_SALES,
         MANAGE_ITEMS,
+        MANAGE_CATEGORIES,
         MANAGE_USERS
     }
     
@@ -381,6 +423,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logo;
     private javax.swing.JButton logoutBtn;
+    private javax.swing.JButton manageCategoriesBtn;
     private javax.swing.JButton manageItemsBtn;
     private javax.swing.JButton manageSalesBtn;
     private javax.swing.JButton manageUsersBtn;

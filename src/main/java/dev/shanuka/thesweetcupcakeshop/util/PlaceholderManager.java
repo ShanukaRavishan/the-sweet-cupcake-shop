@@ -16,6 +16,10 @@ public class PlaceholderManager {
         // Initialize placeholders
         placeholders.put("emailField", "Email");
         placeholders.put("passwordField", "Password");
+        placeholders.put("itemSearchField", "Search for an item...");
+        placeholders.put("itemNameInput", "Item name");
+        placeholders.put("itemPriceInput", "0.00");
+        placeholders.put("categoryNameInput", "Category name");
     }
     
     public static String getPlaceholderFor(String textFieldName) {

@@ -8,5 +8,6 @@ package dev.shanuka.thesweetcupcakeshop.enums;
 public enum DataFile {
     USERS,
     ITEMS,
+    CATEGORIES,
     ORDERS
 }

@@ -6,9 +6,9 @@ package dev.shanuka.thesweetcupcakeshop.model;
  * @author Shanuka
  */
 public class Item {
-    
     private Integer id;
     private String name;
+    private String category;
     private Double price;
 
     /**
@@ -24,9 +24,10 @@ public class Item {
      * @param name The name of the item
      * @param price The price of the item
      */
-    public Item(Integer id, String name, Double price) {
+    public Item(Integer id, String name, String category, Double price) {
         this.id = id;
         this.name = name;
+        this.category = category;
         this.price = price;
     }
 
@@ -36,6 +37,10 @@ public class Item {
 
     public String getName() {
         return name;
+    }
+    
+    public String getCategory() {
+        return category;
     }
 
     public Double getPrice() {

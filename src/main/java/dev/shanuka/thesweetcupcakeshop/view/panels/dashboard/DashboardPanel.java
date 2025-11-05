@@ -5,25 +5,16 @@ import dev.shanuka.thesweetcupcakeshop.model.Order;
 import dev.shanuka.thesweetcupcakeshop.service.AuthService;
 import dev.shanuka.thesweetcupcakeshop.service.InventoryService;
 import dev.shanuka.thesweetcupcakeshop.service.OrderService;
+import dev.shanuka.thesweetcupcakeshop.util.AppConstants;
 import dev.shanuka.thesweetcupcakeshop.util.Fonts;
+import dev.shanuka.thesweetcupcakeshop.util.Helpers;
 import dev.shanuka.thesweetcupcakeshop.util.Messages;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 /**
  * Dashboard view for user dashboard
@@ -31,18 +22,13 @@ import javax.swing.table.JTableHeader;
  * @author Shanuka
  */
 public class DashboardPanel extends javax.swing.JPanel {
-
-    // Formats dates like 20/10/2025
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
-
-    // Formats numbers with commas
-    private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("#,###");
-
     // Parent frame in which the current panel is mounted
     JFrame parentFrame;
     
     /**
      * Creates new form Dashboard
+     * 
+     * @param parentFrame Parent frame (for displaying error message dialogs)
      */
     public DashboardPanel(JFrame parentFrame) {
         initComponents();
@@ -56,54 +42,14 @@ public class DashboardPanel extends javax.swing.JPanel {
         averageSalePrice.setFont(Fonts.robotoRegular.deriveFont(16f));
 
         // Show greeting to the currently logged in user
-        greetingLabel.setText(String.format("Welcome Back, %s!", AuthService.loggedUser.getfirstName()));
+        greetingLabel.setText(String.format("Welcome Back, %s!", AuthService.loggedUser.getFirstName()));
         
-        // Our custom renderer will pull these settings
-        JTableHeader header = recentOrdersTable.getTableHeader();
-        header.setBackground(Color.WHITE);
-        header.setPreferredSize(new Dimension(0, 40));
-        header.setReorderingAllowed(false);
-        header.setForeground(new Color(66, 66, 66));
-        header.setFont(Fonts.robotoMedium.deriveFont(16f));
-
-        // Create and set a custom header renderer to remove vertical lines between columns
-        DefaultTableCellRenderer customHeaderRenderer = new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(
-                    JTable table, Object value, boolean isSelected,
-                    boolean hasFocus, int row, int column) {
-
-                Component c = super.getTableCellRendererComponent(
-                        table, value, isSelected, hasFocus, row, column);
-
-                // Apply settings from the header object
-                c.setBackground(header.getBackground());
-                c.setForeground(header.getForeground());
-                c.setFont(header.getFont());
-
-                if (c instanceof javax.swing.JLabel) {
-                    JLabel label = (javax.swing.JLabel) c;
-
-                    // Replace the default border
-                    label.setBorder(new EmptyBorder(0, 4, 0, 0));
-
-                    // Set alignment
-                    label.setHorizontalAlignment(SwingConstants.LEFT);
-                }
-                return c;
-            }
-        };
-
-        // Set this as the new default renderer for the header
-        recentOrdersTable.getTableHeader().setDefaultRenderer(customHeaderRenderer);
-
-        // Configure cell renderer
-        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
-        cellRenderer.setFont(Fonts.robotoRegular.deriveFont(16f));
-        recentOrdersTable.setDefaultRenderer(String.class, cellRenderer); // Apply to all String columns
-
-        // Set data row height to match padding
-        recentOrdersTable.setRowHeight(35);
+        // Format the recent orders table
+        Helpers.formatTable(recentOrdersTable);
+        
+        // Set column widths
+        recentOrdersTable.getColumnModel().getColumn(0).setPreferredWidth(50); // Order ID
+        recentOrdersTable.getColumnModel().getColumn(2).setPreferredWidth(400); // Item Name
 
         // Dashboard data must be updated within the constructor for the first time as formAncestorAdded causes a slight delay
         try {
@@ -123,8 +69,12 @@ public class DashboardPanel extends javax.swing.JPanel {
         
         // Load recent sales data (upto 11)
         try {
+            // Retrieve all orders
             List<Order> orders = OrderService.getAllOrders();
 
+            // Sort orders by date (newest to oldest)
+            orders.sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+            
             for (Order order : orders) {
                 if (orders.indexOf(order) == 11) {
                     break;
@@ -163,10 +113,10 @@ public class DashboardPanel extends javax.swing.JPanel {
         }
 
         // Format and display the calculated widget data
-        monthlySalesAmount.setText(NUMBER_FORMAT.format(monthlySalesValue) + " LKR");
-        monthlyOrdersAmount.setText(NUMBER_FORMAT.format(monthlyOrders.size()) + " Orders");
-        itemsListedAmount.setText(NUMBER_FORMAT.format(InventoryService.getAllItems().size()) + " Items");
-        averageSaleAmount.setText(NUMBER_FORMAT.format(monthlySalesValue / monthlyOrders.size()) + " LKR");
+        monthlySalesAmount.setText(AppConstants.NUMBER_FORMAT.format(monthlySalesValue) + " LKR");
+        monthlyOrdersAmount.setText(AppConstants.NUMBER_FORMAT.format(monthlyOrders.size()) + " Orders");
+        itemsListedAmount.setText(AppConstants.NUMBER_FORMAT.format(InventoryService.getAllItems().size()) + " Items");
+        averageSaleAmount.setText(AppConstants.NUMBER_FORMAT.format(monthlySalesValue / monthlyOrders.size()) + " LKR");
     }
 
     /**
@@ -180,11 +130,11 @@ public class DashboardPanel extends javax.swing.JPanel {
         String formattedID = String.format("%03d", order.getId());
 
         //  Format the Date
-        String formattedDate = DATE_FORMAT.format(order.getDate());
+        String formattedDate = AppConstants.DATE_FORMAT.format(order.getDate());
 
         // Format the Currency
-        String formattedPrice = NUMBER_FORMAT.format(order.getItemPrice()) + " LKR";
-        String formattedTotal = NUMBER_FORMAT.format(order.getTotalAmount()) + " LKR";
+        String formattedPrice = AppConstants.NUMBER_FORMAT.format(order.getItemPrice()) + " LKR";
+        String formattedTotal = AppConstants.NUMBER_FORMAT.format(order.getTotalAmount()) + " LKR";
 
         // Create the data row with the formatted strings
         Object[] rowData = new Object[]{

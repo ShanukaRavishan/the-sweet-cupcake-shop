@@ -1,0 +1,27 @@
+------- OBJECT -------
+id: 1
+name: Cupcakes
+------- OBJECT -------
+id: 2
+name: Brownies
+------- OBJECT -------
+id: 3
+name: Cheesecakes
+------- OBJECT -------
+id: 4
+name: Cakes & Slices
+------- OBJECT -------
+id: 5
+name: Cookies & Biscuits
+------- OBJECT -------
+id: 6
+name: Pastries
+------- OBJECT -------
+id: 7
+name: Other Desserts
+------- OBJECT -------
+id: 8
+name: Beverages
+------- OBJECT -------
+id: 9
+name: Seasonal Specials

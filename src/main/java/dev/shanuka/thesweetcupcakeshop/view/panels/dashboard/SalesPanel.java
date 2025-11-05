@@ -1,18 +1,109 @@
 package dev.shanuka.thesweetcupcakeshop.view.panels.dashboard;
 
+import dev.shanuka.thesweetcupcakeshop.exception.ApplicationError;
+import dev.shanuka.thesweetcupcakeshop.model.Order;
+import dev.shanuka.thesweetcupcakeshop.service.InventoryService;
+import dev.shanuka.thesweetcupcakeshop.service.OrderService;
+import dev.shanuka.thesweetcupcakeshop.util.AppConstants;
 import dev.shanuka.thesweetcupcakeshop.util.Fonts;
+import dev.shanuka.thesweetcupcakeshop.util.Helpers;
+import dev.shanuka.thesweetcupcakeshop.util.Messages;
+import dev.shanuka.thesweetcupcakeshop.view.panels.dashboard.dialogs.RecordSaleDialog;
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Shanuka
  */
 public class SalesPanel extends javax.swing.JPanel {
-
+    // Parent frame in which the current panel is mounted
+    JFrame parentFrame;
+    
     /**
      * Creates new form SalesPanel
+     * 
+     * @param parentFrame Parent frame (for displaying error message dialogs)
      */
-    public SalesPanel() {
+    public SalesPanel(JFrame parentFrame) {
         initComponents();
+        
+        this.parentFrame = parentFrame;
+        
+        // Format the sales table
+        Helpers.formatTable(salesTable);
+        
+        // Set column widths
+        salesTable.getColumnModel().getColumn(0).setPreferredWidth(20); // Order ID
+        salesTable.getColumnModel().getColumn(2).setPreferredWidth(400); // Item Name
+        
+        // Update data shown in the sales table
+        try {
+            updateSalesData();
+        } catch (ApplicationError ex) {
+            Messages.showError(parentFrame, "Application Error", "An unexpected error has occurred while fetching sales data");
+        }
+    }
+    
+    /**
+     * Updates sales data
+     */
+    private void updateSalesData() throws ApplicationError {
+        // Clear the recent sales table before adding new rows
+        DefaultTableModel model = (DefaultTableModel) salesTable.getModel(); // Get the table's model
+        model.setRowCount(0);
+        
+        // Load and display sales data
+        try {
+            // Retrieved all orders
+            List<Order> orders = OrderService.getAllOrders();
+            
+            // Sort orders by date (newest to oldest)
+            orders.sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+
+            for (Order order : orders) {
+                addOrderToTable(order);
+            }
+        } catch (ApplicationError e) {
+            System.err.println("An error has been occured while retrieving the orders!");
+        }
+    }
+    
+    /**
+     * Adds a new order to the table.
+     */
+    private void addOrderToTable(Order order) {
+        // Get the table's model
+        DefaultTableModel model = (DefaultTableModel) salesTable.getModel();
+
+        // Format the ID (makes it three digit)
+        String formattedID = String.format("%03d", order.getId());
+
+        //  Format the Date
+        String formattedDate = AppConstants.DATE_FORMAT.format(order.getDate());
+
+        // Format the Currency
+        String formattedPrice = AppConstants.NUMBER_FORMAT.format(order.getItemPrice()) + " LKR";
+        String formattedTotal = AppConstants.NUMBER_FORMAT.format(order.getTotalAmount()) + " LKR";
+
+        // Create the data row with the formatted strings
+        Object[] rowData = new Object[]{
+            formattedID,
+            formattedDate,
+            order.getItem(),
+            formattedPrice,
+            order.getQuantity(),
+            formattedTotal
+        };
+
+        // Add the row to the model
+        model.addRow(rowData);
     }
 
     /**
@@ -29,19 +120,29 @@ public class SalesPanel extends javax.swing.JPanel {
         recentSales = new javax.swing.JPanel();
         recentSalesTitle = new javax.swing.JLabel();
         recentSalesTable = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        recentOrdersTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        recentOrdersScrollPane = new javax.swing.JScrollPane();
+        salesTable = new javax.swing.JTable();
+        recordSaleBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(244, 244, 244));
         setMaximumSize(new java.awt.Dimension(1213, 900));
         setMinimumSize(new java.awt.Dimension(1213, 900));
         setPreferredSize(new java.awt.Dimension(1213, 900));
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         setLayout(new java.awt.GridBagLayout());
 
         manageSalesLabel.setFont(new java.awt.Font("Roboto", 1, 28)); // NOI18N
         manageSalesLabel.setForeground(new java.awt.Color(66, 66, 66));
         manageSalesLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        manageSalesLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/manage_sales/sale_icon.png"))); // NOI18N
         manageSalesLabel.setText("Manage Sales");
         manageSalesLabel.setToolTipText("");
         manageSalesLabel.setAlignmentY(0.0F);
@@ -53,7 +154,6 @@ public class SalesPanel extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(50, 70, 50, 0);
         add(manageSalesLabel, gridBagConstraints);
-        manageSalesLabel.getAccessibleContext().setAccessibleName("Manage Sales");
 
         recentSales.setBackground(new java.awt.Color(255, 255, 255));
         recentSales.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -67,13 +167,13 @@ public class SalesPanel extends javax.swing.JPanel {
         recentSalesTable.setPreferredSize(new java.awt.Dimension(1070, 470));
         recentSalesTable.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jScrollPane2.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jScrollPane2.setDoubleBuffered(true);
+        recentOrdersScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        recentOrdersScrollPane.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        recentOrdersScrollPane.setDoubleBuffered(true);
 
-        recentOrdersTable.setFont(Fonts.robotoRegular.deriveFont(16f));
-        recentOrdersTable.setForeground(new java.awt.Color(66, 66, 66));
-        recentOrdersTable.setModel(new javax.swing.table.DefaultTableModel(
+        salesTable.setFont(Fonts.robotoRegular.deriveFont(16f));
+        salesTable.setForeground(new java.awt.Color(66, 66, 66));
+        salesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -96,12 +196,12 @@ public class SalesPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        recentOrdersTable.setRowHeight(40);
-        recentOrdersTable.setSelectionBackground(new java.awt.Color(246, 246, 246));
-        recentOrdersTable.setSelectionForeground(new java.awt.Color(66, 66, 66));
-        jScrollPane2.setViewportView(recentOrdersTable);
+        salesTable.setRowHeight(40);
+        salesTable.setSelectionBackground(new java.awt.Color(246, 246, 246));
+        salesTable.setSelectionForeground(new java.awt.Color(66, 66, 66));
+        recentOrdersScrollPane.setViewportView(salesTable);
 
-        recentSalesTable.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+        recentSalesTable.add(recentOrdersScrollPane, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout recentSalesLayout = new javax.swing.GroupLayout(recentSales);
         recentSales.setLayout(recentSalesLayout);
@@ -134,29 +234,69 @@ public class SalesPanel extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         add(recentSales, gridBagConstraints);
 
-        jButton1.setBackground(new java.awt.Color(154, 2, 21));
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Record Sale");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(154, 2, 21), 1, true));
-        jButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jButton1.setPreferredSize(new java.awt.Dimension(140, 45));
+        recordSaleBtn.setBackground(new java.awt.Color(154, 2, 21));
+        recordSaleBtn.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        recordSaleBtn.setForeground(new java.awt.Color(255, 255, 255));
+        recordSaleBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons/manage_sales/sale_icon.png"))); // NOI18N
+        recordSaleBtn.setText("Record Sale");
+        recordSaleBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(154, 2, 21), 1, true));
+        recordSaleBtn.setIconTextGap(6);
+        recordSaleBtn.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        recordSaleBtn.setMaximumSize(new java.awt.Dimension(155, 50));
+        recordSaleBtn.setMinimumSize(new java.awt.Dimension(155, 50));
+        recordSaleBtn.setPreferredSize(new java.awt.Dimension(155, 50));
+        recordSaleBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recordSaleBtnActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 40);
-        add(jButton1, gridBagConstraints);
+        add(recordSaleBtn, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+
+    // Event: Refresh sales data when the panel is being mounted
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // Update data shown in the sales table
+        try {
+            updateSalesData();
+        } catch (ApplicationError ex) {
+            Messages.showError(parentFrame, "Application Error", "An unexpected error has occurred while fetching sales data");
+        }
+    }//GEN-LAST:event_formAncestorAdded
+
+    // Event: When the record sale button is clicked
+    private void recordSaleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordSaleBtnActionPerformed
+        JDialog dialog = new JDialog(parentFrame, "Record a new Sale", true);
+        dialog.getContentPane().add(new RecordSaleDialog(parentFrame, () -> {
+            // Close the record sale modal after the order has been recorded
+            dialog.setVisible(false);
+            
+            try {
+                // Refresh sales data
+                updateSalesData();
+            }
+            
+            catch(ApplicationError e) {
+                
+            }
+        }));
+        dialog.pack();
+        dialog.setLocationRelativeTo(parentFrame);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_recordSaleBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel manageSalesLabel;
-    private javax.swing.JTable recentOrdersTable;
+    private javax.swing.JScrollPane recentOrdersScrollPane;
     private javax.swing.JPanel recentSales;
     private javax.swing.JPanel recentSalesTable;
     private javax.swing.JLabel recentSalesTitle;
+    private javax.swing.JButton recordSaleBtn;
+    private javax.swing.JTable salesTable;
     // End of variables declaration//GEN-END:variables
 }
