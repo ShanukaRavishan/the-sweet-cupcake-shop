@@ -5,13 +5,15 @@ firstName: Sachintha
 lastName: Sandaruwan
 email: sachintha@gmail.com
 password: #Wolf@2003
+
 ------- OBJECT -------
 id: 2
-role: CASHIER
-firstName: Supun
-lastName: Heshan
-email: supun@gmail.com
-password: #Thaniya@2007
+role: MANAGER
+firstName: John
+lastName: Doe
+email: johndoe@gmail.com
+password: #JohnDoe@97
+
 ------- OBJECT -------
 id: 3
 role: CASHIER
@@ -19,10 +21,11 @@ firstName: Hashan
 lastName: Lakshitha
 email: lakshitha@gmail.com
 password: #Pinky@2000
+
 ------- OBJECT -------
 id: 4
 role: CASHIER
-firstName: Chanuka
-lastName: Dilhara
-email: chanuka@gmail.com
-password: #Ayesha@2003
+firstName: Jane
+lastName: Doe
+email: janedoe@gmail.com
+password: #JaneDoe@98

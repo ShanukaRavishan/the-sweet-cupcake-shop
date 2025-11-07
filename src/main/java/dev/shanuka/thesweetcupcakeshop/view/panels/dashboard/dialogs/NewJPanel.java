@@ -6,7 +6,7 @@ package dev.shanuka.thesweetcupcakeshop.view.panels.dashboard.dialogs;
 
 /**
  *
- * @author Nethmina
+ * @author Shanuka
  */
 public class NewJPanel extends javax.swing.JPanel {
 

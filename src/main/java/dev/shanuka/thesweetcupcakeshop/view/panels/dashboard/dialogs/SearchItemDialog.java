@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Nethmina
+ * @author Shanuka
  */
 public class SearchItemDialog extends javax.swing.JPanel {
     Function setSelectedItem;

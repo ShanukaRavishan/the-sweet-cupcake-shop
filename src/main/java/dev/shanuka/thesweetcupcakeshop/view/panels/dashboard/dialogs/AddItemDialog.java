@@ -115,7 +115,7 @@ public class AddItemDialog extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        addItemButton = new javax.swing.JButton();
+        addUserButton = new javax.swing.JButton();
         dialogTitle = new javax.swing.JLabel();
         itemNameTitle = new javax.swing.JLabel();
         itemNamePanel = new javax.swing.JPanel();
@@ -130,18 +130,18 @@ public class AddItemDialog extends javax.swing.JPanel {
         setBackground(new java.awt.Color(244, 244, 244));
         setPreferredSize(new java.awt.Dimension(722, 566));
 
-        addItemButton.setBackground(new java.awt.Color(97, 11, 21));
-        addItemButton.setFont(new java.awt.Font("Roboto", 0, 22)); // NOI18N
-        addItemButton.setForeground(new java.awt.Color(204,204,204)
+        addUserButton.setBackground(new java.awt.Color(97, 11, 21));
+        addUserButton.setFont(new java.awt.Font("Roboto", 0, 22)); // NOI18N
+        addUserButton.setForeground(new java.awt.Color(204,204,204)
         );
-        addItemButton.setText("Add Item");
-        addItemButton.setBorder(null);
-        addItemButton.setMaximumSize(new java.awt.Dimension(52, 52));
-        addItemButton.setMinimumSize(new java.awt.Dimension(52, 52));
-        addItemButton.setPreferredSize(new java.awt.Dimension(52, 52));
-        addItemButton.addActionListener(new java.awt.event.ActionListener() {
+        addUserButton.setText("Add Item");
+        addUserButton.setBorder(null);
+        addUserButton.setMaximumSize(new java.awt.Dimension(52, 52));
+        addUserButton.setMinimumSize(new java.awt.Dimension(52, 52));
+        addUserButton.setPreferredSize(new java.awt.Dimension(52, 52));
+        addUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addItemButtonActionPerformed(evt);
+                addUserButtonActionPerformed(evt);
             }
         });
 
@@ -238,7 +238,7 @@ public class AddItemDialog extends javax.swing.JPanel {
         categoriesList.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         categoriesList.setForeground(new java.awt.Color(113, 113, 113));
         categoriesList.setMaximumRowCount(1000);
-        categoriesList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categoriesList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CASHIER", "MANAGER" }));
         categoriesList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 230, 230)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -254,7 +254,7 @@ public class AddItemDialog extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(itemNamePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+                            .addComponent(addUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(itemPricePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,7 +286,7 @@ public class AddItemDialog extends javax.swing.JPanel {
                     .addComponent(categoriesList)
                     .addComponent(itemPricePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(58, 58, 58)
-                .addComponent(addItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -313,7 +313,7 @@ public class AddItemDialog extends javax.swing.JPanel {
     }
 
     // Event: When the add item button is being clicked
-    private void addItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemButtonActionPerformed
+    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
         if(!validateInputs()) return; // Continue only if all inputs are valid
         
         // Add the new item
@@ -335,7 +335,7 @@ public class AddItemDialog extends javax.swing.JPanel {
         
         // Run the action passed by the parent form
         action.run();
-    }//GEN-LAST:event_addItemButtonActionPerformed
+    }//GEN-LAST:event_addUserButtonActionPerformed
 
     // Event: When anywhere within the item price panel is clicked
     private void itemPricePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemPricePanelMouseClicked
@@ -349,15 +349,13 @@ public class AddItemDialog extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addItemButton;
+    private javax.swing.JButton addUserButton;
     private javax.swing.JComboBox<String> categoriesList;
     private javax.swing.JLabel categoryLabel;
     private javax.swing.JLabel currencyLabel;
     private javax.swing.JLabel dialogTitle;
     private javax.swing.JTextField itemNameInput;
-    private javax.swing.JTextField itemNameInput1;
     private javax.swing.JPanel itemNamePanel;
-    private javax.swing.JPanel itemNamePanel1;
     private javax.swing.JLabel itemNameTitle;
     private javax.swing.JTextField itemPriceInput;
     private javax.swing.JLabel itemPriceLabel;

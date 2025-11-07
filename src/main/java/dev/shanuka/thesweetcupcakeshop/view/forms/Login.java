@@ -336,8 +336,13 @@ public class Login extends javax.swing.JFrame {
             }
             
             // If none of the errors haven't occured
-            // Show the login form asynchronously
+            // Show the dashboaed form asynchronously
             SwingUtilities.invokeLater(() -> {
+                // Clear and restore placeholders for email and password as the login form is stored as a static field
+                // This will prevent previously logged in user's credentials from being exposed after logging out
+                emailTextField.setText(PlaceholderManager.getPlaceholderFor(emailTextField.getName()));
+                passwordTextField.setText(PlaceholderManager.getPlaceholderFor(passwordTextField.getName()));
+                
                 FormManager.ShowForm(FormManager.getDashboardForm(), this);
             });
         } 

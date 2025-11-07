@@ -20,6 +20,10 @@ public class PlaceholderManager {
         placeholders.put("itemNameInput", "Item name");
         placeholders.put("itemPriceInput", "0.00");
         placeholders.put("categoryNameInput", "Category name");
+        placeholders.put("firstNameField", "First name");
+        placeholders.put("lastNameField", "Last name");
+        placeholders.put("newEmailField", "Email address");
+        placeholders.put("newPasswordField", "New Password");
     }
     
     public static String getPlaceholderFor(String textFieldName) {

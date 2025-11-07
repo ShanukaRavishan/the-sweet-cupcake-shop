@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 /**
  * Modal dialog for recording an order
  *
- * @author Nethmina
+ * @author Shanuka
  */
 public class RecordSaleDialog extends javax.swing.JPanel {
     // Parent frame in which the current panel is mounted

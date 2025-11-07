@@ -53,7 +53,7 @@ public class Dashboard extends javax.swing.JFrame {
                 return CategoriesView;
                 
             case MANAGE_USERS:
-                if(UsersView == null) UsersView = new UsersPanel();
+                if(UsersView == null) UsersView = new UsersPanel(this);
                 return UsersView;
              
             default:

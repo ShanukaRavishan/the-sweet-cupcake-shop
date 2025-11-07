@@ -488,17 +488,3 @@ item: Belgian Waffle (Single)
 itemPrice: 500.0
 quantity: 1
 totalAmount: 500.0
-------- OBJECT -------
-id: 1
-date: 2025-10-30T18:02:18.415Z
-item: New York Cheesecake Slice
-itemPrice: 450.0
-quantity: 4
-totalAmount: 1800.0
-------- OBJECT -------
-id: 2
-date: 2025-10-30T18:02:29.643Z
-item: Caramel Drizzle Cupcake
-itemPrice: 310.0
-quantity: 3
-totalAmount: 930.0

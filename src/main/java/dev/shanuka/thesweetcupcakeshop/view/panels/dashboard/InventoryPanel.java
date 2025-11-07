@@ -114,7 +114,7 @@ private void clearItemsTable() {
             String deletedItem = InventoryService.removeItem(item.getId());
 
             // Show delection successful message
-            // Messages.showSuccess(this, "Item Deleted Successfully", "The item \"" + deletedItem + "\" has been deleted successfully");
+            Messages.showSuccess(this, "Item Deleted Successfully", "The item \"" + deletedItem + "\" has been deleted successfully");
 
             // Refresh the list of items
             updateItemsList();

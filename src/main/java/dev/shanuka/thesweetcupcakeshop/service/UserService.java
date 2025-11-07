@@ -76,7 +76,7 @@ public class UserService {
         throw new NotFoundError("No user matches the given user id");
     }
 
-    private static List<User> getAllUsers() throws ApplicationError {
+    public static List<User> getAllUsers() throws ApplicationError {
         return dataStore.retrieveData();
     }
 }
