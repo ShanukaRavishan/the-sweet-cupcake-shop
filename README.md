@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/cover.png" alt="The Sweet Cupcake Shop – Java Swing Application" width="850">
+  <img src="assets/preview.png" alt="The Sweet Cupcake Shop – Java Swing Application" width="240" height="auto">
 </p>
 
 <h1 align="center">The Sweet Cupcake Shop</h1>
