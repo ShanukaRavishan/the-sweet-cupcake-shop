@@ -320,7 +320,7 @@ public class Login extends javax.swing.JFrame {
         }
         
         // If password field is empty
-        if (passwordTextField.getText().isBlank()) {
+        if (passwordTextField.getText().isBlank() || passwordTextField.getText().equals(PlaceholderManager.getPlaceholderFor(passwordTextField.getName()))) {
             Messages.showError(this, "Input Error", "Please enter the password to continue");
             return; // Exit the method
         }

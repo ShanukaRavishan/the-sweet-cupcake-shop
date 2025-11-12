@@ -109,10 +109,10 @@ public class DataStore<T> {
                 if (value instanceof Date) {
                     SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                     isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-                    
+
                     value = isoFormat.format((Date) value);
                 }
-                
+
                 // Append the formatted "key: value" line
                 sb.append(name)
                         .append(": ")
@@ -190,8 +190,15 @@ public class DataStore<T> {
                 Map<String, String> dataBlock = new HashMap<String, String>();
 
                 for (String line : lines) {
+                    if (!line.contains(":")) {
+                        continue; // skip corrupted or empty lines
+                    }
                     String[] _line = line.split(":", 2);
-                    dataBlock.put(_line[0], _line[1].trim());
+
+                    String key = _line[0].trim();
+                    String value = _line.length > 1 ? _line[1].trim() : "";
+
+                    dataBlock.put(key, value);
                 }
 
                 parsedBlocks.add(dataBlock);
@@ -266,7 +273,6 @@ public class DataStore<T> {
             return Date.from(Instant.parse(stringValue));
         }
 
-        
         // Handle enums by converting the string to an enum constant
         if (fieldType.isEnum()) {
             return Enum.valueOf((Class<Enum>) fieldType, stringValue);
